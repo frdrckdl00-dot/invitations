@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitation for Ara 💖</title>
+  <style>
+    body {
+      background-color: navy;
+      color: lightblue;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #stitch {
+      width: 200px;
+      margin: 15px;
+    }
+    button {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      margin: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    #yesBtn {
+      background-color: pink;
+      color: white;
+    }
+    #noBtn {
+      background-color: red;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-600px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ara 💐, will you go on a date with me?</h1>
+  <img id="stitch" src="stitch.png" alt="Stitch">
+
+  <div>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
+
+  <audio id="music" src="https://ia801603.us.archive.org/3/items/AmazingGrace_201303/AmazingGrace.mp3"></audio>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const music = document.getElementById("music");
+
+    // YES button click
+    yesBtn.addEventListener("click", () => {
+      document.querySelector("h1").innerText = 
+        "Yay Ara! 💕 'Let all that you do be done in love.' – 1 Cor 16:14";
+      document.querySelector("h1").style.color = "pink";
+      music.play();
+
+      // create hearts
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createHeart, i * 300);
+      }
+    });
+
+    // NO button click
+    noBtn.addEventListener("click", () => {
+      let currentWidth = noBtn.offsetWidth;
+      if (currentWidth > 40) {
+        noBtn.style.width = (currentWidth - 20) + "px";
+        noBtn.style.fontSize = (parseInt(window.getComputedStyle(noBtn).fontSize) - 2) + "px";
+      } else {
+        noBtn.remove();
+        document.querySelector("h1").innerText = "Looks like only YES is left 😉💖";
+      }
+    });
+
+    // floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💖";
+      document.body.appendChild(heart);
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+  </script>
+</body>
+</html>
